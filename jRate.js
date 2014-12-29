@@ -42,6 +42,8 @@ SOFTWARE.
             min: 0,
             max: 5,
             precision: 1,
+            horizontal: true,
+            reverse: false,
             readOnly: false,
             onChange: null,
             onSet: null
@@ -66,7 +68,8 @@ SOFTWARE.
 
         function setShape() {
             var header = '<svg width="' + settings.width + '" height=' + settings.height + ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink=\"http://www.w3.org/1999/xlink\"';
-            var linearGrad = '<defs><linearGradient id="grad">' +
+            var hz = settings.horizontal;
+            var linearGrad = '<defs><linearGradient id="grad" x1="0%" y1="0%" x2="' + (hz ? 100 : 0) + '%" y2="' + (hz ? 0 : 100) + '%">' +
                 '<stop offset="0%"  stop-color=' + settings.normalColor + '/>' +
                 '<stop offset="0%" stop-color=' + settings.normalColor + '/>' +
                 '</linearGradient></defs>';
@@ -141,8 +144,7 @@ SOFTWARE.
             rating = (rating - settings.min) / singleValue;
             var fillColor = settings.startColor;
 
-            //Right To Left operation
-            if (settings.rightToLeft) {
+            if (settings.reverse) {
                 for (var i = 0; i < rating; i++) {
                     $jRate.find("svg").eq(settings.count - 1 - i).find("#grad").find("stop").eq(0).attr({
                         'offset': '100%'
@@ -227,10 +229,17 @@ SOFTWARE.
             if (settings.readOnly) return;
 
             var svg = shapes.eq(ith - 1);
-            var partial = (e.pageX - svg.offset().left) / svg.width();
+            var partial;
+
+            if (settings.horizontal) {
+                partial = (e.pageX - svg.offset().left) / svg.width();
+            } else {
+                partial = (e.pageY - svg.offset().top) / svg.height();
+            }
+
             var count = (settings.max - settings.min) / settings.count;
-            partial = (settings.rightToLeft) ? partial : 1 - partial;
-            var rating = ((settings.rightToLeft ? (settings.max - settings.min - ith + 1) : ith) - partial) * count;
+            partial = (settings.reverse) ? partial : 1 - partial;
+            var rating = ((settings.reverse ? (settings.max - settings.min - ith + 1) : ith) - partial) * count;
             rating = settings.min + Number(rating.toFixed(settings.precision));
             if (rating <= settings.max && rating >= settings.min) {
                 showRating(rating);
@@ -267,12 +276,17 @@ SOFTWARE.
         }
 
         function drawShape(shapeRate) {
-            for (var i = 0; i < settings.count; i++) {
+            var svg, i;
+            for (i = 0; i < settings.count; i++) {
                 $jRate.append(shapeRate);
             }
             shapes = $jRate.find('svg');
             for (i = 0; i < settings.count; i++) {
-                bindEvents(shapes.eq(i), i + 1);
+                svg = shapes.eq(i);
+                bindEvents(svg, i + 1);
+                if (!settings.horizontal) {
+                    svg.css('display', 'block');
+                }
             }
             showNormalRating();
             showRating(settings.rating);
@@ -285,7 +299,6 @@ SOFTWARE.
         //TODO
         //Validation implementation
         //Mini to max size
-        //Horizontal and  vertical support
 
         //TODO Add this as a part of validation
         if (settings.startColor) startColorCoords = colorToRGBA(settings.startColor);
