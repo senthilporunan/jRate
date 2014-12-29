@@ -35,9 +35,12 @@ SOFTWARE.
             count: 5,
             width: "20",
             height: "20",
+            widthGrowth: 0.0,
+            heightGrowth: 0.0,
             normalColor: "white",
             startColor: "yellow",
             endColor: "green",
+            shapeGap: "0px",
             opacity: 1,
             min: 0,
             max: 5,
@@ -276,7 +279,7 @@ SOFTWARE.
         }
 
         function drawShape(shapeRate) {
-            var svg, i;
+            var svg, i, sw, sh;
             for (i = 0; i < settings.count; i++) {
                 $jRate.append(shapeRate);
             }
@@ -285,7 +288,33 @@ SOFTWARE.
                 svg = shapes.eq(i);
                 bindEvents(svg, i + 1);
                 if (!settings.horizontal) {
-                    svg.css('display', 'block');
+                    svg.css({
+                        'display': 'block',
+                        'margin-bottom' : settings.shapeGap || '0px'
+                    });
+                } else {
+                    svg.css('margin-left', (settings.shapeGap || '0px'));
+                }
+                if(settings.widthGrowth) {
+                    sw = 'scaleX(' + (1 + settings.widthGrowth * i) + ')';
+                    svg.css({
+                        'transform' : sw,
+                        '-webkit-transform' : sw,
+                        '-moz-transform': sw,
+                        '-ms-transform': sw,
+                        '-o-transform': sw,
+                    });
+                }
+
+                if(settings.heightGrowth) {
+                    sh = 'scaleY(' + (1 + settings.heightGrowth * i) + ')';
+                    svg.css({
+                        'transform' : sh,
+                        '-webkit-transform' : sh,
+                        '-moz-transform': sh,
+                        '-ms-transform': sh,
+                        '-o-transform': sh,
+                    });
                 }
             }
             showNormalRating();
