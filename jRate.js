@@ -40,6 +40,7 @@ SOFTWARE.
             normalColor: "white",
             startColor: "yellow",
             endColor: "green",
+            strokeColor: "black",
             shapeGap: "0px",
             opacity: 1,
             min: 0,
@@ -52,7 +53,7 @@ SOFTWARE.
             onSet: null
         };
         var settings = $.extend({}, defaults, options);
-        var startColorCoords, endColorCoords, shapes = [];
+        var startColorCoords, endColorCoords, shapes;
 
         function isDefined(name) {
             return typeof name !== "undefined";
@@ -70,7 +71,7 @@ SOFTWARE.
         }
 
         function setShape() {
-            var header = '<svg width="' + settings.width + '" height=' + settings.height + ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink=\"http://www.w3.org/1999/xlink\"';
+            var header = '<svg width="' + settings.width + '" height=' + settings.height + ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"';
             var hz = settings.horizontal;
             var linearGrad = '<defs><linearGradient id="grad" x1="0%" y1="0%" x2="' + (hz ? 100 : 0) + '%" y2="' + (hz ? 0 : 100) + '%">' +
                 '<stop offset="0%"  stop-color=' + settings.normalColor + '/>' +
@@ -79,22 +80,22 @@ SOFTWARE.
             var shapeRate;
             switch (settings['shape']) {
                 case 'STAR':
-                    shapeRate = header + 'viewBox="0 12.705 512 486.59"' + '>' + linearGrad + '<polygon style="fill: url(#grad);stroke:black;stroke-width:2px;" ' + 'points="256.814,12.705 317.205,198.566' + ' 512.631,198.566 354.529,313.435 ' + '414.918,499.295 256.814,384.427 ' + '98.713,499.295 159.102,313.435 ' + '1,198.566 196.426,198.566 "/>' + '</svg>';
+                    shapeRate = header + 'viewBox="0 12.705 512 486.59"' + '>' + linearGrad + '<polygon style="fill: url(#grad);stroke:' + settings.strokeColor + ';stroke-width:2px;" ' + 'points="256.814,12.705 317.205,198.566' + ' 512.631,198.566 354.529,313.435 ' + '414.918,499.295 256.814,384.427 ' + '98.713,499.295 159.102,313.435 ' + '1,198.566 196.426,198.566 "/>' + '</svg>';
                     break;
                 case 'CIRCLE':
-                    shapeRate = header + '>' + linearGrad + '<circle  cx="' + settings.width / 2 + '" cy="' + settings.height / 2 + '" r="' + settings.width / 2 + '" fill="url(#grad)" style="stroke:black;stroke-width:2px;"/>' + '</svg>';
+                    shapeRate = header + '>' + linearGrad + '<circle  cx="' + settings.width / 2 + '" cy="' + settings.height / 2 + '" r="' + settings.width / 2 + '" fill="url(#grad)" style="stroke:' + settings.strokeColor + ';stroke-width:2px;"/>' + '</svg>';
                     break;
                 case 'RECTANGLE':
-                    shapeRate = header + '>' + linearGrad + '<rect width="' + settings.width + '" height="' + settings.height + '" fill="url(#grad)" style="stroke:black;stroke-width:2px;"/>' +
+                    shapeRate = header + '>' + linearGrad + '<rect width="' + settings.width + '" height="' + settings.height + '" fill="url(#grad)" style="stroke:' + settings.strokeColor + ';stroke-width:2px;"/>' +
                         '</svg>';
                     break;
                 case 'TRIANGLE':
                     shapeRate = header + '>' + linearGrad +
-                        '<polygon points="' + settings.width / 2 + ',0 0,' + settings.height + ' ' + settings.width + ',' + settings.height + '" fill="url(#grad)" style="stroke:black;stroke-width:2px;"/>' +
+                        '<polygon points="' + settings.width / 2 + ',0 0,' + settings.height + ' ' + settings.width + ',' + settings.height + '" fill="url(#grad)" style="stroke:' + settings.strokeColor + ';stroke-width:2px;"/>' +
                         '</svg>';
                     break;
                 case 'RHOMBUS':
-                    shapeRate = header + '>' + linearGrad + '<polygon points="' + settings.width / 2 + ',0 ' + settings.width + ',' + settings.height / 2 + ' ' + settings.width / 2 + ',' + settings.height + ' 0,' + settings.height / 2 + '" fill="url(#grad)"  style="stroke:black;stroke-width:2px;"/>' + '</svg>';
+                    shapeRate = header + '>' + linearGrad + '<polygon points="' + settings.width / 2 + ',0 ' + settings.width + ',' + settings.height / 2 + ' ' + settings.width / 2 + ',' + settings.height + ' 0,' + settings.height / 2 + '" fill="url(#grad)"  style="stroke:' + settings.strokeColor + ';stroke-width:2px;"/>' + '</svg>';
                     break;
                 default:
                     throw Error("No such shape as " + settings['shape']);
@@ -125,16 +126,16 @@ SOFTWARE.
 
         function showNormalRating() {
             for (var i = 0; i < settings.count; i++) {
-                $jRate.find("svg").eq(i).find("#grad").find("stop").eq(0).attr({
+                shapes.eq(i).find("#grad").find("stop").eq(0).attr({
                     'offset': '0%'
                 });
-                $jRate.find("svg").eq(i).find("#grad").find("stop").eq(0).attr({
+                shapes.eq(i).find("#grad").find("stop").eq(0).attr({
                     'stop-color': settings.normalColor
                 });
-                $jRate.find("svg").eq(i).find("#grad").find("stop").eq(1).attr({
+                shapes.eq(i).find("#grad").find("stop").eq(1).attr({
                     'offset': '0%'
                 });
-                $jRate.find("svg").eq(i).find("#grad").find("stop").eq(1).attr({
+                shapes.eq(i).find("#grad").find("stop").eq(1).attr({
                     'stop-color': settings.normalColor
                 });
             }
@@ -149,23 +150,23 @@ SOFTWARE.
 
             if (settings.reverse) {
                 for (var i = 0; i < rating; i++) {
-                    $jRate.find("svg").eq(settings.count - 1 - i).find("#grad").find("stop").eq(0).attr({
+                    shapes.eq(settings.count - 1 - i).find("#grad").find("stop").eq(0).attr({
                         'offset': '100%'
                     });
-                    $jRate.find("svg").eq(settings.count - 1 - i).find("#grad").find("stop").eq(0).attr({
+                    shapes.eq(settings.count - 1 - i).find("#grad").find("stop").eq(0).attr({
                         'stop-color': fillColor
                     });
                     if (parseInt(rating) !== rating) {
-                        $jRate.find("svg").eq(Math.ceil(settings.count - rating) - 1).find("#grad").find("stop").eq(0).attr({
+                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad").find("stop").eq(0).attr({
                             'offset': 100 - (rating * 10 % 10) * 10 + '%'
                         });
-                        $jRate.find("svg").eq(Math.ceil(settings.count - rating) - 1).find("#grad").find("stop").eq(0).attr({
+                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad").find("stop").eq(0).attr({
                             'stop-color': settings.normalColor
                         });
-                        $jRate.find("svg").eq(Math.ceil(settings.count - rating) - 1).find("#grad").find("stop").eq(1).attr({
+                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad").find("stop").eq(1).attr({
                             'offset': 100 - (rating * 10 % 10) * 10 + '%'
                         });
-                        $jRate.find("svg").eq(Math.ceil(settings.count - rating) - 1).find("#grad").find("stop").eq(1).attr({
+                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad").find("stop").eq(1).attr({
                             'stop-color': fillColor
                         });
                     }
@@ -175,17 +176,17 @@ SOFTWARE.
                 }
             } else {
                 for (var i = 0; i < rating; i++) {
-                    $jRate.find("svg").eq(i).find("#grad").find("stop").eq(0).attr({
+                    shapes.eq(i).find("#grad").find("stop").eq(0).attr({
                         'offset': '100%'
                     });
-                    $jRate.find("svg").eq(i).find("#grad").find("stop").eq(0).attr({
+                    shapes.eq(i).find("#grad").find("stop").eq(0).attr({
                         'stop-color': fillColor
                     });
                     if (rating * 10 % 10 > 0) {
-                        $jRate.find("svg").eq(Math.ceil(rating) - 1).find("#grad").find("stop").eq(0).attr({
+                        shapes.eq(Math.ceil(rating) - 1).find("#grad").find("stop").eq(0).attr({
                             'offset': (rating * 10 % 10) * 10 + '%'
                         });
-                        $jRate.find("svg").eq(Math.ceil(rating) - 1).find("#grad").find("stop").eq(0).attr({
+                        shapes.eq(Math.ceil(rating) - 1).find("#grad").find("stop").eq(0).attr({
                             'stop-color': fillColor
                         });
                     }
@@ -290,27 +291,27 @@ SOFTWARE.
                 if (!settings.horizontal) {
                     svg.css({
                         'display': 'block',
-                        'margin-bottom' : settings.shapeGap || '0px'
+                        'margin-bottom': settings.shapeGap || '0px'
                     });
                 } else {
-                    svg.css('margin-left', (settings.shapeGap || '0px'));
+                    svg.css('margin-right', (settings.shapeGap || '0px'));
                 }
-                if(settings.widthGrowth) {
+                if (settings.widthGrowth) {
                     sw = 'scaleX(' + (1 + settings.widthGrowth * i) + ')';
                     svg.css({
-                        'transform' : sw,
-                        '-webkit-transform' : sw,
+                        'transform': sw,
+                        '-webkit-transform': sw,
                         '-moz-transform': sw,
                         '-ms-transform': sw,
                         '-o-transform': sw,
                     });
                 }
 
-                if(settings.heightGrowth) {
+                if (settings.heightGrowth) {
                     sh = 'scaleY(' + (1 + settings.heightGrowth * i) + ')';
                     svg.css({
-                        'transform' : sh,
-                        '-webkit-transform' : sh,
+                        'transform': sh,
+                        '-webkit-transform': sh,
                         '-moz-transform': sh,
                         '-ms-transform': sh,
                         '-o-transform': sh,
@@ -319,7 +320,7 @@ SOFTWARE.
             }
             showNormalRating();
             showRating(settings.rating);
-            $jRate.find("svg").attr({
+            shapes.attr({
                 width: settings.width,
                 height: settings.height
             });
