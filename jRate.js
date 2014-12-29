@@ -32,7 +32,7 @@ SOFTWARE.
         var defaults = {
             rating: 0,
             shape: "STAR",
-            count: "5",
+            count: 5,
             width: "20",
             height: "20",
             normalColor: "white",
@@ -47,7 +47,7 @@ SOFTWARE.
             onSet: null
         };
         var settings = $.extend({}, defaults, options);
-        var startColorCoords, endColorCoords;
+        var startColorCoords, endColorCoords, shapes = [];
 
         function isDefined(name) {
             return typeof name !== "undefined";
@@ -105,14 +105,14 @@ SOFTWARE.
             $jRate.css('fill', settings['shape']);
         }
 
-        function bindEvents() {
-            $jRate.on("mousemove", onMouseEnter)
-                .on("mouseenter", onMouseEnter)
-                .on("mouseover", onMouseEnter)
-                .on("hover", onMouseEnter)
+        function bindEvents($svg, i) {
+            $svg.on("mousemove", onMouseEnter(i))
+                .on("mouseenter", onMouseEnter(i))
+                .on("mouseover", onMouseEnter(i))
+                .on("hover", onMouseEnter(i))
                 .on("mouseleave", onMouseLeave)
                 .on("mouseout", onMouseLeave)
-                .on("click", onMouseClick)
+                .on("click", onMouseClick(i))
                 .on("JRate.change", onChange)
                 .on("JRate.set", onSet);
         }
@@ -150,8 +150,7 @@ SOFTWARE.
                     $jRate.find("svg").eq(settings.count - 1 - i).find("#grad").find("stop").eq(0).attr({
                         'stop-color': fillColor
                     });
-                    if (rating * 10 % 10 > 0) {
-                        console.log('inside if ' + rating);
+                    if (parseInt(rating) !== rating) {
                         $jRate.find("svg").eq(Math.ceil(settings.count - rating) - 1).find("#grad").find("stop").eq(0).attr({
                             'offset': 100 - (rating * 10 % 10) * 10 + '%'
                         });
@@ -164,12 +163,9 @@ SOFTWARE.
                         $jRate.find("svg").eq(Math.ceil(settings.count - rating) - 1).find("#grad").find("stop").eq(1).attr({
                             'stop-color': fillColor
                         });
-                    } else {
-                        console.log('inside else');
-                        console.log(rating);
                     }
                     if (isDefined(endColorCoords)) {
-                        fillColor = formulateNewColor(settings.count - 1, i, startColorCoords, endColorCoords);
+                        fillColor = formulateNewColor(settings.count - 1, i);
                     }
                 }
             } else {
@@ -189,23 +185,21 @@ SOFTWARE.
                         });
                     }
                     if (isDefined(endColorCoords)) {
-                        fillColor = formulateNewColor(settings.count, i, startColorCoords, endColorCoords);
+                        fillColor = formulateNewColor(settings.count, i);
                     }
                 }
             }
-            // set current rating
-            settings.rating = rating;
         }
 
-        var formulateNewColor = function(totalCount, currentVal, startFill, endFill) {
+        var formulateNewColor = function(totalCount, currentVal) {
             var avgFill = [];
             for (var i = 0; i < 3; i++) {
-                var diff = Math.round((startFill[i] - endFill[i]) / totalCount);
-                var newValue = startFill[i] + (diff * (currentVal + 1));
+                var diff = Math.round((startColorCoords[i] - endColorCoords[i]) / totalCount);
+                var newValue = startColorCoords[i] + (diff * (currentVal + 1));
                 if (newValue / 256)
-                    avgFill[i] = (startFill[i] - (diff * (currentVal + 1))) % 256;
+                    avgFill[i] = (startColorCoords[i] - (diff * (currentVal + 1))) % 256;
                 else
-                    avgFill[i] = (startFill[i] + (diff * (currentVal + 1))) % 256;
+                    avgFill[i] = (startColorCoords[i] + (diff * (currentVal + 1))) % 256;
             }
             return "rgba(" + avgFill[0] + "," + avgFill[1] + "," + avgFill[2] + "," + settings.opacity + ")";
         };
@@ -223,39 +217,41 @@ SOFTWARE.
             return ctx.getImageData(0, 0, 1, 1).data;
         }
 
-        function onMouseEnter(e) {
-            if (settings.readOnly) return;
-            var pageX = settings.rightToLeft ? (settings.count * settings.width) - e.pageX : e.pageX;
-            var pageLeft = $jRate.offset().left;
-
-            var singleValue = (settings.max - settings.min) / settings.count;
-            var rating = (((pageX - pageLeft) / settings.width)) * singleValue;
-            rating = settings.min + Number(rating.toFixed(settings.precision));
-            showRating(rating);
-            $jRate.trigger("JRate.change", {
-                rating: rating
-            });
-        }
-
         function onMouseLeave() {
             if (!settings.readOnly) {
                 showRating(settings.rating);
             }
         }
 
-        function onMouseClick(e) {
+        function onEnterOrClickEvent(e, ith, label, update) {
             if (settings.readOnly) return;
 
-            var pageX = settings.rightToLeft ? (settings.count * settings.width) - e.pageX : e.pageX;
-            var pageLeft = $jRate.offset().left;
+            var svg = shapes.eq(ith - 1);
+            var partial = (e.pageX - svg.offset().left) / svg.width();
+            var count = (settings.max - settings.min) / settings.count;
+            partial = (settings.rightToLeft) ? partial : 1 - partial;
+            var rating = ((settings.rightToLeft ? (settings.max - settings.min - ith + 1) : ith) - partial) * count;
+            rating = settings.min + Number(rating.toFixed(settings.precision));
+            if (rating <= settings.max && rating >= settings.min) {
+                showRating(rating);
+                if (update) settings.rating = rating;
+                $jRate.trigger(label, {
+                    rating: settings.rating
+                });
+            }
+        }
 
-            var singleValue = (settings.max - settings.min) / settings.count;
-            var rating = (((pageX - pageLeft) / settings.width)) * singleValue;
-            settings.rating = settings.min + Number(rating.toFixed(settings.precision));
-            showRating(settings.rating);
-            $jRate.trigger("JRate.set", {
-                rating: settings.rating
-            });
+
+        function onMouseEnter(i) {
+            return function(e) {
+                onEnterOrClickEvent(e, i, "JRate.change");
+            };
+        }
+
+        function onMouseClick(i) {
+            return function(e) {
+                onEnterOrClickEvent(e, i, "JRate.set", true);
+            };
         }
 
         function onChange(e, data) {
@@ -274,7 +270,10 @@ SOFTWARE.
             for (var i = 0; i < settings.count; i++) {
                 $jRate.append(shapeRate);
             }
-
+            shapes = $jRate.find('svg');
+            for (i = 0; i < settings.count; i++) {
+                bindEvents(shapes.eq(i), i + 1);
+            }
             showNormalRating();
             showRating(settings.rating);
             $jRate.find("svg").attr({
@@ -294,7 +293,6 @@ SOFTWARE.
 
         setCSS();
         setShape();
-        bindEvents();
 
         return $.extend({}, this, {
             "getRating": getRating,
