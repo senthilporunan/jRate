@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title> jRate - JQuery Plugin | toolitup.com</title>
+	
+	<script src="jquery.min.js"></script>
+	<script src="jRate.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			var that = this;
+			$("#jRate").jRate({
+				rating: 3,
+				onChange: function(rating) {
+					console.log("OnChange: Rating: "+rating);
+				},
+				onSet: function(rating) {
+					console.log("OnSet: Rating: "+rating);
+				}
+			});
+			
+		});
+	</script>
+	
+</head>
+<body>
+	<h2>jRate Demo Page</h2>
+	<div id="jRate" style="height:50px;width: 200px;"></div>
+	
+</body>
+</html>
