@@ -70,38 +70,37 @@ SOFTWARE.
             showRating(rating);
         }
 
-        function setShape() {
+        function getShape(currValue) {
             var header = '<svg width="' + settings.width + '" height=' + settings.height + ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"';
             var hz = settings.horizontal;
-            var linearGrad = '<defs><linearGradient id="grad" x1="0%" y1="0%" x2="' + (hz ? 100 : 0) + '%" y2="' + (hz ? 0 : 100) + '%">' +
+            var linearGrad = '<defs><linearGradient id="grad'+currValue+'" x1="0%" y1="0%" x2="' + (hz ? 100 : 0) + '%" y2="' + (hz ? 0 : 100) + '%">' +
                 '<stop offset="0%"  stop-color=' + settings.normalColor + '/>' +
                 '<stop offset="0%" stop-color=' + settings.normalColor + '/>' +
                 '</linearGradient></defs>';
             var shapeRate;
             switch (settings['shape']) {
                 case 'STAR':
-                    shapeRate = header + 'viewBox="0 12.705 512 486.59"' + '>' + linearGrad + '<polygon style="fill: url(#grad);stroke:' + settings.strokeColor + ';stroke-width:2px;" ' + 'points="256.814,12.705 317.205,198.566' + ' 512.631,198.566 354.529,313.435 ' + '414.918,499.295 256.814,384.427 ' + '98.713,499.295 159.102,313.435 ' + '1,198.566 196.426,198.566 "/>' + '</svg>';
+                    shapeRate = header + 'viewBox="0 12.705 512 486.59"' + '>' + linearGrad + '<polygon style="fill: url(#grad'+currValue+');stroke:' + settings.strokeColor + ';stroke-width:2px;" ' + 'points="256.814,12.705 317.205,198.566' + ' 512.631,198.566 354.529,313.435 ' + '414.918,499.295 256.814,384.427 ' + '98.713,499.295 159.102,313.435 ' + '1,198.566 196.426,198.566 "/>' + '</svg>';
                     break;
                 case 'CIRCLE':
-                    shapeRate = header + '>' + linearGrad + '<circle  cx="' + settings.width / 2 + '" cy="' + settings.height / 2 + '" r="' + settings.width / 2 + '" fill="url(#grad)" style="stroke:' + settings.strokeColor + ';stroke-width:2px;"/>' + '</svg>';
+                    shapeRate = header + '>' + linearGrad + '<circle  cx="' + settings.width / 2 + '" cy="' + settings.height / 2 + '" r="' + settings.width / 2 + '" fill="url(#grad'+currValue+')" style="stroke:' + settings.strokeColor + ';stroke-width:2px;"/>' + '</svg>';
                     break;
                 case 'RECTANGLE':
-                    shapeRate = header + '>' + linearGrad + '<rect width="' + settings.width + '" height="' + settings.height + '" fill="url(#grad)" style="stroke:' + settings.strokeColor + ';stroke-width:2px;"/>' +
+                    shapeRate = header + '>' + linearGrad + '<rect width="' + settings.width + '" height="' + settings.height + '" fill="url(#grad'+currValue+')" style="stroke:' + settings.strokeColor + ';stroke-width:2px;"/>' +
                         '</svg>';
                     break;
                 case 'TRIANGLE':
                     shapeRate = header + '>' + linearGrad +
-                        '<polygon points="' + settings.width / 2 + ',0 0,' + settings.height + ' ' + settings.width + ',' + settings.height + '" fill="url(#grad)" style="stroke:' + settings.strokeColor + ';stroke-width:2px;"/>' +
+                        '<polygon points="' + settings.width / 2 + ',0 0,' + settings.height + ' ' + settings.width + ',' + settings.height + '" fill="url(#grad'+currValue+')" style="stroke:' + settings.strokeColor + ';stroke-width:2px;"/>' +
                         '</svg>';
                     break;
                 case 'RHOMBUS':
-                    shapeRate = header + '>' + linearGrad + '<polygon points="' + settings.width / 2 + ',0 ' + settings.width + ',' + settings.height / 2 + ' ' + settings.width / 2 + ',' + settings.height + ' 0,' + settings.height / 2 + '" fill="url(#grad)"  style="stroke:' + settings.strokeColor + ';stroke-width:2px;"/>' + '</svg>';
+                    shapeRate = header + '>' + linearGrad + '<polygon points="' + settings.width / 2 + ',0 ' + settings.width + ',' + settings.height / 2 + ' ' + settings.width / 2 + ',' + settings.height + ' 0,' + settings.height / 2 + '" fill="url(#grad'+currValue+')"  style="stroke:' + settings.strokeColor + ';stroke-width:2px;"/>' + '</svg>';
                     break;
                 default:
                     throw Error("No such shape as " + settings['shape']);
             }
-
-            drawShape(shapeRate);
+			return shapeRate;
         }
 
         function setCSS() {
@@ -126,16 +125,16 @@ SOFTWARE.
 
         function showNormalRating() {
             for (var i = 0; i < settings.count; i++) {
-                shapes.eq(i).find("#grad").find("stop").eq(0).attr({
+                shapes.eq(i).find("#grad"+(i+1)).find("stop").eq(0).attr({
                     'offset': '0%'
                 });
-                shapes.eq(i).find("#grad").find("stop").eq(0).attr({
+                shapes.eq(i).find("#grad"+(i+1)).find("stop").eq(0).attr({
                     'stop-color': settings.normalColor
                 });
-                shapes.eq(i).find("#grad").find("stop").eq(1).attr({
+                shapes.eq(i).find("#grad"+(i+1)).find("stop").eq(1).attr({
                     'offset': '0%'
                 });
-                shapes.eq(i).find("#grad").find("stop").eq(1).attr({
+                shapes.eq(i).find("#grad"+(i+1)).find("stop").eq(1).attr({
                     'stop-color': settings.normalColor
                 });
             }
@@ -150,23 +149,23 @@ SOFTWARE.
 
             if (settings.reverse) {
                 for (var i = 0; i < rating; i++) {
-                    shapes.eq(settings.count - 1 - i).find("#grad").find("stop").eq(0).attr({
+                    shapes.eq(settings.count - 1 - i).find("#grad"+(i+1)).find("stop").eq(0).attr({
                         'offset': '100%'
                     });
-                    shapes.eq(settings.count - 1 - i).find("#grad").find("stop").eq(0).attr({
+                    shapes.eq(settings.count - 1 - i).find("#grad"+(i+1)).find("stop").eq(0).attr({
                         'stop-color': fillColor
                     });
                     if (parseInt(rating) !== rating) {
-                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad").find("stop").eq(0).attr({
+                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad"+(i+1)).find("stop").eq(0).attr({
                             'offset': 100 - (rating * 10 % 10) * 10 + '%'
                         });
-                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad").find("stop").eq(0).attr({
+                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad"+(i+1)).find("stop").eq(0).attr({
                             'stop-color': settings.normalColor
                         });
-                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad").find("stop").eq(1).attr({
+                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad"+(i+1)).find("stop").eq(1).attr({
                             'offset': 100 - (rating * 10 % 10) * 10 + '%'
                         });
-                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad").find("stop").eq(1).attr({
+                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad"+(i+1)).find("stop").eq(1).attr({
                             'stop-color': fillColor
                         });
                     }
@@ -176,17 +175,17 @@ SOFTWARE.
                 }
             } else {
                 for (var i = 0; i < rating; i++) {
-                    shapes.eq(i).find("#grad").find("stop").eq(0).attr({
+                    shapes.eq(i).find("#grad"+(i+1)).find("stop").eq(0).attr({
                         'offset': '100%'
                     });
-                    shapes.eq(i).find("#grad").find("stop").eq(0).attr({
+                    shapes.eq(i).find("#grad"+(i+1)).find("stop").eq(0).attr({
                         'stop-color': fillColor
                     });
                     if (rating * 10 % 10 > 0) {
-                        shapes.eq(Math.ceil(rating) - 1).find("#grad").find("stop").eq(0).attr({
+                        shapes.eq(Math.ceil(rating) - 1).find("#grad"+(i+1)).find("stop").eq(0).attr({
                             'offset': (rating * 10 % 10) * 10 + '%'
                         });
-                        shapes.eq(Math.ceil(rating) - 1).find("#grad").find("stop").eq(0).attr({
+                        shapes.eq(Math.ceil(rating) - 1).find("#grad"+(i+1)).find("stop").eq(0).attr({
                             'stop-color': fillColor
                         });
                     }
@@ -279,10 +278,10 @@ SOFTWARE.
             }
         }
 
-        function drawShape(shapeRate) {
+        function drawShape() {
             var svg, i, sw, sh;
             for (i = 0; i < settings.count; i++) {
-                $jRate.append(shapeRate);
+                $jRate.append(getShape(i+1));
             }
             shapes = $jRate.find('svg');
             for (i = 0; i < settings.count; i++) {
@@ -335,7 +334,7 @@ SOFTWARE.
         if (settings.endColor) endColorCoords = colorToRGBA(settings.endColor);
 
         setCSS();
-        setShape();
+		drawShape();;
 
         return $.extend({}, this, {
             "getRating": getRating,
