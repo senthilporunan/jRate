@@ -114,11 +114,11 @@ SOFTWARE.
         function bindEvents($svg, i) {
             $svg.on("mousemove", onMouseEnter(i))
                 .on("mouseenter", onMouseEnter(i))
+				.on("click", onMouseClick(i))
                 .on("mouseover", onMouseEnter(i))
                 .on("hover", onMouseEnter(i))
                 .on("mouseleave", onMouseLeave)
                 .on("mouseout", onMouseLeave)
-                .on("click", onMouseClick(i))
                 .on("JRate.change", onChange)
                 .on("JRate.set", onSet);
         }
@@ -149,23 +149,25 @@ SOFTWARE.
 
             if (settings.reverse) {
                 for (var i = 0; i < rating; i++) {
-                    shapes.eq(settings.count - 1 - i).find("#grad"+(i+1)).find("stop").eq(0).attr({
+					var j = settings.count - 1 - i;
+                    shapes.eq(j).find("#grad"+(j+1)).find("stop").eq(0).attr({
                         'offset': '100%'
                     });
-                    shapes.eq(settings.count - 1 - i).find("#grad"+(i+1)).find("stop").eq(0).attr({
+                    shapes.eq(j).find("#grad"+(j+1)).find("stop").eq(0).attr({
                         'stop-color': fillColor
                     });
                     if (parseInt(rating) !== rating) {
-                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad"+(i+1)).find("stop").eq(0).attr({
+						var k = Math.ceil(settings.count - rating) - 1;
+                        shapes.eq(k).find("#grad"+(k+1)).find("stop").eq(0).attr({
                             'offset': 100 - (rating * 10 % 10) * 10 + '%'
                         });
-                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad"+(i+1)).find("stop").eq(0).attr({
+                        shapes.eq(k).find("#grad"+(k+1)).find("stop").eq(0).attr({
                             'stop-color': settings.normalColor
                         });
-                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad"+(i+1)).find("stop").eq(1).attr({
+                        shapes.eq(k).find("#grad"+(k+1)).find("stop").eq(1).attr({
                             'offset': 100 - (rating * 10 % 10) * 10 + '%'
                         });
-                        shapes.eq(Math.ceil(settings.count - rating) - 1).find("#grad"+(i+1)).find("stop").eq(1).attr({
+                        shapes.eq(k).find("#grad"+(k+1)).find("stop").eq(1).attr({
                             'stop-color': fillColor
                         });
                     }
@@ -247,7 +249,7 @@ SOFTWARE.
             if (rating <= settings.max && rating >= settings.min) {
                 showRating(rating);
                 if (update) settings.rating = rating;
-                $jRate.trigger(label, {
+                svg.trigger(label, {
                     rating: settings.rating
                 });
             }
@@ -324,10 +326,6 @@ SOFTWARE.
                 height: settings.height
             });
         }
-
-        //TODO
-        //Validation implementation
-        //Mini to max size
 
         //TODO Add this as a part of validation
         if (settings.startColor) startColorCoords = colorToRGBA(settings.startColor);
