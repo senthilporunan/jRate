@@ -227,6 +227,7 @@ SOFTWARE.
         function onMouseLeave() {
             if (!settings.readOnly) {
                 showRating(settings.rating);
+				onChange(null, {rating : settings.rating});
             }
         }
 
@@ -250,7 +251,7 @@ SOFTWARE.
                 showRating(rating);
                 if (update) settings.rating = rating;
                 svg.trigger(label, {
-                    rating: settings.rating
+                    rating: rating
                 });
             }
         }
@@ -327,6 +328,10 @@ SOFTWARE.
             });
         }
 
+        //TODO
+        //Validation implementation
+        //Mini to max size
+
         //TODO Add this as a part of validation
         if (settings.startColor) startColorCoords = colorToRGBA(settings.startColor);
         if (settings.endColor) endColorCoords = colorToRGBA(settings.endColor);
@@ -342,7 +347,7 @@ SOFTWARE.
             },
             "isReadOnly": function() {
                 return settings.readOnly;
-            }
+            },
         });
     };
 }(jQuery));
