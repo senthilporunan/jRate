@@ -1,6 +1,6 @@
 /*! The MIT License (MIT)
 
-Copyright (c) 2014 Prince John Wesley <princejohnwesley@gmail.com>
+Copyright (c) 2015 Senthil Porunan<senthilraja39@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -227,6 +227,7 @@ SOFTWARE.
         function onMouseLeave() {
             if (!settings.readOnly) {
                 showRating(settings.rating);
+				onChange(null, {rating : settings.rating});
             }
         }
 
@@ -250,7 +251,7 @@ SOFTWARE.
                 showRating(rating);
                 if (update) settings.rating = rating;
                 svg.trigger(label, {
-                    rating: settings.rating
+                    rating: rating
                 });
             }
         }
@@ -326,6 +327,10 @@ SOFTWARE.
                 height: settings.height
             });
         }
+
+        //TODO
+        //Validation implementation
+        //Mini to max size
 
         //TODO Add this as a part of validation
         if (settings.startColor) startColorCoords = colorToRGBA(settings.startColor);
