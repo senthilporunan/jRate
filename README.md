@@ -138,4 +138,5 @@ $("#jRate").jRate({
 ```
 ####License
 This plugin is licensed under the [MIT license](https://github.com/senthilporunan/jRate/blob/master/LICENSE).
+
 Copyright (c) 2015 [Senthil Porunan](http://www.toolitup.com/)
