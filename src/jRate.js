@@ -20,6 +20,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+Source: https://github.com/senthilporunan/jRate
+Demo: http://www.toolitup.com/JRate.html
 **/
 ;
 (function($, undefined) {
@@ -37,7 +39,7 @@ SOFTWARE.
             height: "20",
             widthGrowth: 0.0,
             heightGrowth: 0.0,
-            normalColor: "white",
+            backgroundColor: "white",
             startColor: "yellow",
             endColor: "green",
             strokeColor: "black",
@@ -74,8 +76,8 @@ SOFTWARE.
             var header = '<svg width="' + settings.width + '" height=' + settings.height + ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"';
             var hz = settings.horizontal;
             var linearGrad = '<defs><linearGradient id="grad'+currValue+'" x1="0%" y1="0%" x2="' + (hz ? 100 : 0) + '%" y2="' + (hz ? 0 : 100) + '%">' +
-                '<stop offset="0%"  stop-color=' + settings.normalColor + '/>' +
-                '<stop offset="0%" stop-color=' + settings.normalColor + '/>' +
+                '<stop offset="0%"  stop-color=' + settings.backgroundColor + '/>' +
+                '<stop offset="0%" stop-color=' + settings.backgroundColor + '/>' +
                 '</linearGradient></defs>';
             var shapeRate;
             switch (settings['shape']) {
@@ -129,13 +131,13 @@ SOFTWARE.
                     'offset': '0%'
                 });
                 shapes.eq(i).find("#grad"+(i+1)).find("stop").eq(0).attr({
-                    'stop-color': settings.normalColor
+                    'stop-color': settings.backgroundColor
                 });
                 shapes.eq(i).find("#grad"+(i+1)).find("stop").eq(1).attr({
                     'offset': '0%'
                 });
                 shapes.eq(i).find("#grad"+(i+1)).find("stop").eq(1).attr({
-                    'stop-color': settings.normalColor
+                    'stop-color': settings.backgroundColor
                 });
             }
         }
@@ -162,7 +164,7 @@ SOFTWARE.
                             'offset': 100 - (rating * 10 % 10) * 10 + '%'
                         });
                         shapes.eq(k).find("#grad"+(k+1)).find("stop").eq(0).attr({
-                            'stop-color': settings.normalColor
+                            'stop-color': settings.backgroundColor
                         });
                         shapes.eq(k).find("#grad"+(k+1)).find("stop").eq(1).attr({
                             'offset': 100 - (rating * 10 % 10) * 10 + '%'
