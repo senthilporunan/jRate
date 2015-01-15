@@ -1,10 +1,13 @@
 
-jRate - Rating jQuery plugin
-=================
+jRate - SVG based Rating jQuery plugin
+=======================================
 
-This jquery plugin helps to generate RATING with various features. Download and include this plugin in your html file.
+This jquery plugin helps to generate SVG based RATING with various fancy features. Download and include this plugin in your html file.
+
+#####[Demo Page](http://www.toolitup.com/jRate.html)
 
 ![Demo](https://rawgit.com/senthilporunan/jRate/master/images/jRate-Star-Demo.gif)
+
 
 ### Including it on your page
 
