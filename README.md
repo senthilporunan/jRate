@@ -32,6 +32,13 @@ $("#jRate").jRate({
   endColor: "blue"
 });
 ```
+###Initial Value
+Set your own default initial value.
+```js
+$("#jRate").jRate({
+  rating:2
+});
+```
 ###Width and Height
 We can customize our own value for width and height.
 ```js
