@@ -8,6 +8,7 @@ This jquery plugin helps to generate SVG based RATING with various fancy feature
 
 ![Demo](https://rawgit.com/senthilporunan/jRate/master/images/jRate-Star-Demo.gif)
 
+![Twitter Demo](https://rawgit.com/senthilporunan/jRate/master/images/jRate-twitter-demo.gif)
 
 ### Including it on your page
 
