@@ -8,6 +8,7 @@ This jquery plugin helps to generate SVG based RATING with various fancy feature
 
 ![Demo](https://rawgit.com/senthilporunan/jRate/master/images/jRate-Star-Demo.gif)
 
+![Twitter Demo](https://rawgit.com/senthilporunan/jRate/master/images/jRate-twitter-demo.gif)
 
 ### Including it on your page
 
@@ -30,6 +31,13 @@ Set your favourite start and end color. By giving value in the form of hex value
 $("#jRate").jRate({
   startColor: "cyan",
   endColor: "blue"
+});
+```
+###Initial Value
+Set your own default initial value.
+```js
+$("#jRate").jRate({
+  rating:2
 });
 ```
 ###Width and Height
