@@ -171,9 +171,7 @@ Demo: http://www.toolitup.com/JRate.html
 			$svg.on("touchstart", onTouchEnter(i))
 				.on("touchmove", onTouchEnter(i))
 				.on("touchend", onTouchClick(i))
-				.on("tap", onTouchClick(i))
-				.on("JRate.change", onChange)
-				.on("JRate.set", onSet);
+				.on("tap", onTouchClick(i));
 	      }
         }
 
