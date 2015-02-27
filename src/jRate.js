@@ -285,6 +285,12 @@ Demo: http://www.toolitup.com/JRate.html
             }
         }
 
+		function workOutPrecision(num) {
+			var multiplactiveInverse = 1/settings.precision;
+
+			return Math.round(num*multiplactiveInverse)/multiplactiveInverse;
+		}
+
         function onEnterOrClickEvent(e, ith, label, update) {
             if (settings.readOnly) return;
 
@@ -300,7 +306,7 @@ Demo: http://www.toolitup.com/JRate.html
             var count = (settings.max - settings.min) / settings.count;
             partial = (settings.reverse) ? partial : 1 - partial;
             var rating = ((settings.reverse ? (settings.max - settings.min - ith + 1) : ith) - partial) * count;
-            rating = settings.min + Number(rating.toFixed(settings.precision));
+            rating = settings.min + Number(workOutPrecision(rating));
 	
             if (rating <= settings.max && rating >= settings.min) {
                 showRating(rating);
@@ -330,7 +336,7 @@ Demo: http://www.toolitup.com/JRate.html
 			var count = (settings.max - settings.min) / settings.count;
 			partial = (settings.reverse) ? partial : 1 - partial;
 			var rating = ((settings.reverse ? (settings.max - settings.min - ith + 1) : ith) - partial) * count;
-			rating = settings.min + Number(rating.toFixed(settings.precision));
+			rating = settings.min + Number(workOutPrecision(rating));
 	
 			if (rating <= settings.max && rating >= settings.min) {
                 showRating(rating);
