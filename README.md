@@ -2,6 +2,8 @@
 jRate - SVG based Rating jQuery plugin
 =======================================
 
+[![Join the chat at https://gitter.im/senthilporunan/jRate](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/senthilporunan/jRate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This jquery plugin helps to generate SVG based RATING with various fancy features. Download and include this plugin in your html file.
 
 #####[Demo Page](http://www.toolitup.com/jRate.html)
