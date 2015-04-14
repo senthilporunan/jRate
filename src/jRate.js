@@ -46,7 +46,8 @@ Demo: http://www.toolitup.com/JRate.html
             opacity: 1,
             min: 0,
             max: 5,
-            precision: 1,
+            precision: 0.1,
+            minSelected: 0,
             horizontal: true,
             reverse: false,
             readOnly: false,
@@ -307,7 +308,8 @@ Demo: http://www.toolitup.com/JRate.html
             partial = (settings.reverse) ? partial : 1 - partial;
             var rating = ((settings.reverse ? (settings.max - settings.min - ith + 1) : ith) - partial) * count;
             rating = settings.min + Number(workOutPrecision(rating));
-	
+			
+			if (rating < settings.minSelected) rating = settings.minSelected;
             if (rating <= settings.max && rating >= settings.min) {
                 showRating(rating);
                 if (update) settings.rating = rating;
@@ -337,7 +339,8 @@ Demo: http://www.toolitup.com/JRate.html
 			partial = (settings.reverse) ? partial : 1 - partial;
 			var rating = ((settings.reverse ? (settings.max - settings.min - ith + 1) : ith) - partial) * count;
 			rating = settings.min + Number(workOutPrecision(rating));
-	
+			
+			if (rating < settings.minSelected) rating = settings.minSelected;
 			if (rating <= settings.max && rating >= settings.min) {
                 showRating(rating);
                 if (update) settings.rating = rating;

@@ -9,10 +9,12 @@
 		$(function () {
 			var that = this;
 			$("#jRate").jRate({
-				rating: 3,
+				rating: 1,
 				strokeColor: 'black',
 				width: 80,
 				height: 80,
+				precision: 0.1,
+				minSelected: 1,
 				onChange: function(rating) {
 					console.log("OnChange: Rating: "+rating);
 				},
