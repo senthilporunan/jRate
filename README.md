@@ -78,6 +78,13 @@ $("#jRate").jRate({
   backgroundColor: 'black'
 });
 ```
+####Color Transparency
+Set transparency value between 0 and 1.
+```js
+$("#jRate").jRate({
+  transparency: 0.5
+});
+```
 ####Gap
 We can set our own gap between two shapes. We can customize our own values in it.
 ```js
