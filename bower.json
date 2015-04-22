@@ -1,0 +1,30 @@
+{
+  "name": "jRate",
+  "version": "1.1",
+  "authors": [
+    "Senthil Porunan <senthilraja39@gmail.com>"
+  ],
+  "description": "Generate SVG based Rating - jQuery Plugin",
+  "main": "dist/jRate.min.js",
+  "keywords": [
+    "jrate",
+    "star",
+    "svg",
+    "toolitup",
+    "rating",
+    "rate"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/senthilporunan/jRate",
+  "dependencies": {
+	"jquery": ">=1.10.2"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "!(dist)"
+  ]
+}
