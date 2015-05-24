@@ -8,7 +8,7 @@
 	<script type="text/javascript">
 		$(function () {
 			var that = this;
-			$("#jRate").jRate({
+			var toolitup = $("#jRate").jRate({
 				rating: 1,
 				strokeColor: 'black',
 				width: 80,
@@ -23,6 +23,10 @@
 				}
 			});
 			
+			$('#btn-click').on('click', function() {
+				toolitup.setRating(0);				
+			});
+			
 		});
 	</script>
 	
@@ -30,6 +34,7 @@
 <body>
 	<h2>jRate Demo Page</h2>
 	<div id="jRate" style="height:50px;width: 200px;"></div>
+	<button id="btn-click" style="margin:0 500px;">Reset Me</button>
 	
 </body>
 </html>
