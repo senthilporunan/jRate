@@ -115,6 +115,14 @@ $("#jRate").jRate({
   precision: 0
 });
 ```
+
+####Precision
+Set the precision value.
+```js
+$("#jRate").jRate({
+  precision: 1
+});
+```
 ####Horizontal
 We can set a boolean variable to make horizontal or vertical. And, set a boolean value for reverse.
 ```js

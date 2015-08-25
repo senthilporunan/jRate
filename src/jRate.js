@@ -317,18 +317,26 @@ Demo: http://www.toolitup.com/JRate.html
 
             var svg = shapes.eq(ith - 1);
             var partial;
-
-            if (settings.horizontal) {
-                partial = (e.pageX - svg.offset().left) / svg.width();
-            } else {
-                partial = (e.pageY - svg.offset().top) / svg.height();
+            if(settings.precision == 1)
+            {
+                partial = 1
             }
-
+            else
+            {
+                if (settings.horizontal) {
+                    partial = (e.pageX - svg.offset().left) / svg.width();
+                } else {
+                    partial = (e.pageY - svg.offset().top) / svg.height();
+                }
+            }
+            partial = 1;
             var count = (settings.max - settings.min) / settings.count;
             partial = (settings.reverse) ? partial : 1 - partial;
+            console.log("test")
             var rating = ((settings.reverse ? (settings.max - settings.min - ith + 1) : ith) - partial) * count;
+
             rating = settings.min + Number(workOutPrecision(rating));
-			
+
 			if (rating < settings.minSelected) rating = settings.minSelected;
             if (rating <= settings.max && rating >= settings.min) {
                 showRating(rating);
@@ -358,8 +366,10 @@ Demo: http://www.toolitup.com/JRate.html
 			var count = (settings.max - settings.min) / settings.count;
 			partial = (settings.reverse) ? partial : 1 - partial;
 			var rating = ((settings.reverse ? (settings.max - settings.min - ith + 1) : ith) - partial) * count;
-			rating = settings.min + Number(workOutPrecision(rating));
-			
+            console.log(rating)
+            rating = settings.min + Number(workOutPrecision(rating));
+			console.log("rating = " + rating)
+
 			if (rating < settings.minSelected) rating = settings.minSelected;
 			if (rating <= settings.max && rating >= settings.min) {
                 showRating(rating);
