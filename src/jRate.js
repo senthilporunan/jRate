@@ -49,6 +49,7 @@ Demo: http://www.toolitup.com/JRate.html
             max: 5,
             precision: 0.1,
             minSelected: 0,
+			strokeWidth: '2px',
             horizontal: true,
             reverse: false,
             readOnly: false,
@@ -86,22 +87,22 @@ Demo: http://www.toolitup.com/JRate.html
             var shapeRate;
             switch (settings['shape']) {
                 case 'STAR':
-                    shapeRate = header + 'viewBox="0 12.705 512 486.59"' + '>' + linearGrad + '<polygon style="fill: url(#'+id+'_grad'+currValue+');stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:2px;" ' + 'points="256.814,12.705 317.205,198.566' + ' 512.631,198.566 354.529,313.435 ' + '414.918,499.295 256.814,384.427 ' + '98.713,499.295 159.102,313.435 ' + '1,198.566 196.426,198.566 "/>' + '</svg>';
+                    shapeRate = header + 'viewBox="0 12.705 512 486.59"' + '>' + linearGrad + '<polygon style="fill: url(#'+id+'_grad'+currValue+');stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:' + settings.strokeWidth + '; "points="256.814,12.705 317.205,198.566' + ' 512.631,198.566 354.529,313.435 ' + '414.918,499.295 256.814,384.427 ' + '98.713,499.295 159.102,313.435 ' + '1,198.566 196.426,198.566 "/>' + '</svg>';
                     break;
                 case 'CIRCLE':
-                    shapeRate = header + '>' + linearGrad + '<circle  cx="' + settings.width / 2 + '" cy="' + settings.height / 2 + '" r="' + settings.width / 2 + '" fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:2px;"/>' + '</svg>';
+                    shapeRate = header + '>' + linearGrad + '<circle  cx="' + settings.width / 2 + '" cy="' + settings.height / 2 + '" r="' + settings.width / 2 + '" fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:' + settings.strokeWidth + ';"/>' + '</svg>';
                     break;
                 case 'RECTANGLE':
-                    shapeRate = header + '>' + linearGrad + '<rect width="' + settings.width + '" height="' + settings.height + '" fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:2px;"/>' +
+                    shapeRate = header + '>' + linearGrad + '<rect width="' + settings.width + '" height="' + settings.height + '" fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:' + settings.strokeWidth + ';"/>' +
                         '</svg>';
                     break;
                 case 'TRIANGLE':
                     shapeRate = header + '>' + linearGrad +
-                        '<polygon points="' + settings.width / 2 + ',0 0,' + settings.height + ' ' + settings.width + ',' + settings.height + '" fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:2px;"/>' +
+                        '<polygon points="' + settings.width / 2 + ',0 0,' + settings.height + ' ' + settings.width + ',' + settings.height + '" fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:'+ settings.strokeWidth + ';"/>' +
                         '</svg>';
                     break;
                 case 'RHOMBUS':
-                    shapeRate = header + '>' + linearGrad + '<polygon points="' + settings.width / 2 + ',0 ' + settings.width + ',' + settings.height / 2 + ' ' + settings.width / 2 + ',' + settings.height + ' 0,' + settings.height / 2 + '" fill="url(#'+id+'_grad'+currValue+')"  style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:2px;"/>' + '</svg>';
+                    shapeRate = header + '>' + linearGrad + '<polygon points="' + settings.width / 2 + ',0 ' + settings.width + ',' + settings.height / 2 + ' ' + settings.width / 2 + ',' + settings.height + ' 0,' + settings.height / 2 + '" fill="url(#'+id+'_grad'+currValue+')"  style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:'+ settings.strokeWidth + ';"/>' + '</svg>';
                     break;
 				case 'FOOD':
 					shapeRate = header + 'viewBox="0 0 50 50"' + '>' + linearGrad + 
