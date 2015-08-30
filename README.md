@@ -115,6 +115,13 @@ $("#jRate").jRate({
   precision: 0
 });
 ```
+####Stroke Width
+Set the stroke width for STAR, CIRCLE, RECTANGLE, RHOMBUS, TRIANGLE only.
+```js
+$("#jRate").jRate({
+  strokeWidth: '25px'
+});
+```
 ####Horizontal
 We can set a boolean variable to make horizontal or vertical. And, set a boolean value for reverse.
 ```js
