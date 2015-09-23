@@ -10,6 +10,10 @@ This jquery plugin helps to generate SVG based RATING with various fancy feature
 
 ![Twitter Demo](https://rawgit.com/senthilporunan/jRate/master/images/jRate-twitter-demo.gif)
 
+## React jRate component
+
+#### [react-jrate](https://github.com/senthilporunan/react-jrate)
+
 ### Including it on your page
 
 Include jQuery and this plugin on your page.
