@@ -4,19 +4,17 @@
 	<title> jRate - JQuery Plugin | toolitup.com</title>
 	
 	<script src="jquery.min.js"></script>
-	<script src="../dist/jRate.min.js"></script>
+	<script src="../src/jRate.js"></script>
 	<script type="text/javascript">
 		$(function () {
 			var that = this;
 			var toolitup = $("#jRate").jRate({
 				rating: 1,
 				strokeColor: 'black',
-				width: 80,
-				height: 80,
-				precision: 0.1,
+				precision: 1,
 				minSelected: 1,
 				onChange: function(rating) {
-					console.log("OnChange: Rating: "+rating);
+					//console.log("OnChange: Rating: "+rating);
 				},
 				onSet: function(rating) {
 					console.log("OnSet: Rating: "+rating);
