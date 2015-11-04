@@ -310,7 +310,7 @@ Demo: http://www.toolitup.com/JRate.html
 		function workOutPrecision(num) {
 			var multiplactiveInverse = 1/settings.precision;
 
-			return Math.round(num*multiplactiveInverse)/multiplactiveInverse;
+			return Math.ceil(num*multiplactiveInverse)/multiplactiveInverse;
 		}
 
         function onEnterOrClickEvent(e, ith, label, update) {
