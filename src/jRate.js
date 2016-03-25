@@ -87,26 +87,26 @@ Demo: http://www.toolitup.com/JRate.html
             var shapeRate;
             switch (settings['shape']) {
                 case 'STAR':
-                    shapeRate = header + 'viewBox="0 12.705 512 486.59"' + '>' + linearGrad + '<polygon style="fill: url(#'+id+'_grad'+currValue+');stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:' + settings.strokeWidth + '; "points="256.814,12.705 317.205,198.566' + ' 512.631,198.566 354.529,313.435 ' + '414.918,499.295 256.814,384.427 ' + '98.713,499.295 159.102,313.435 ' + '1,198.566 196.426,198.566 "/>' + '</svg>';
+                    shapeRate = header + 'viewBox="0 12.705 512 486.59"' + '>' + linearGrad + '<polygon style="fill: url(#'+id+'_grad'+currValue+');stroke:' + settings.strokeColor + ';fill-opacity:' + (+settings.transparency) + ';stroke-width:' + settings.strokeWidth + '; "points="256.814,12.705 317.205,198.566' + ' 512.631,198.566 354.529,313.435 ' + '414.918,499.295 256.814,384.427 ' + '98.713,499.295 159.102,313.435 ' + '1,198.566 196.426,198.566 "/>' + '</svg>';
                     break;
                 case 'CIRCLE':
-                    shapeRate = header + '>' + linearGrad + '<circle  cx="' + settings.width / 2 + '" cy="' + settings.height / 2 + '" r="' + settings.width / 2 + '" fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:' + settings.strokeWidth + ';"/>' + '</svg>';
+                    shapeRate = header + '>' + linearGrad + '<circle  cx="' + settings.width / 2 + '" cy="' + settings.height / 2 + '" r="' + settings.width / 2 + '" fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + (+settings.transparency) + ';stroke-width:' + settings.strokeWidth + ';"/>' + '</svg>';
                     break;
                 case 'RECTANGLE':
-                    shapeRate = header + '>' + linearGrad + '<rect width="' + settings.width + '" height="' + settings.height + '" fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:' + settings.strokeWidth + ';"/>' +
+                    shapeRate = header + '>' + linearGrad + '<rect width="' + settings.width + '" height="' + settings.height + '" fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + (+settings.transparency) + ';stroke-width:' + settings.strokeWidth + ';"/>' +
                         '</svg>';
                     break;
                 case 'TRIANGLE':
                     shapeRate = header + '>' + linearGrad +
-                        '<polygon points="' + settings.width / 2 + ',0 0,' + settings.height + ' ' + settings.width + ',' + settings.height + '" fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:'+ settings.strokeWidth + ';"/>' +
+                        '<polygon points="' + settings.width / 2 + ',0 0,' + settings.height + ' ' + settings.width + ',' + settings.height + '" fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + (+settings.transparency) + ';stroke-width:'+ settings.strokeWidth + ';"/>' +
                         '</svg>';
                     break;
                 case 'RHOMBUS':
-                    shapeRate = header + '>' + linearGrad + '<polygon points="' + settings.width / 2 + ',0 ' + settings.width + ',' + settings.height / 2 + ' ' + settings.width / 2 + ',' + settings.height + ' 0,' + settings.height / 2 + '" fill="url(#'+id+'_grad'+currValue+')"  style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:'+ settings.strokeWidth + ';"/>' + '</svg>';
+                    shapeRate = header + '>' + linearGrad + '<polygon points="' + settings.width / 2 + ',0 ' + settings.width + ',' + settings.height / 2 + ' ' + settings.width / 2 + ',' + settings.height + ' 0,' + settings.height / 2 + '" fill="url(#'+id+'_grad'+currValue+')"  style="stroke:' + settings.strokeColor + ';fill-opacity:' + (+settings.transparency) + ';stroke-width:'+ settings.strokeWidth + ';"/>' + '</svg>';
                     break;
 				case 'FOOD':
-					shapeRate = header + 'viewBox="0 0 50 50"' + '>' + linearGrad + 
-					'<path fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';"' + 
+					shapeRate = header + 'viewBox="0 0 50 50"' + '>' + linearGrad +
+					'<path fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + (+settings.transparency) + ';"' +
 					'd="M45.694,21.194C45.694,9.764,36.43,0.5,25,0.5S4.306,9.764,4.306,21.194c0,8.621,5.272,16.005,12.764,19.115'+
 					'c-1.882,2.244-3.762,4.486-5.645,6.73c-0.429,0.5-0.458,1.602,0.243,2.145c0.7,0.551,1.757,0.252,2.139-0.289'+
 					'c1.878-2.592,3.753-5.189,5.63-7.783c1.774,0.494,3.633,0.777,5.561,0.777c1.85,0,3.64-0.266,5.349-0.723'+
@@ -123,8 +123,8 @@ Demo: http://www.toolitup.com/JRate.html
 					'c0-9.183,7.444-16.631,16.632-16.631c9.188,0,16.625,7.447,16.625,16.631C41.63,28.576,36.816,34.828,30.155,37z"/>'+'</svg>';
 					break;
 				case 'TWITTER':
-					shapeRate = header + 'viewBox="0 0 512 512"' + '>' + linearGrad + 
-					'<path fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:0.7px;"' + 
+					shapeRate = header + 'viewBox="0 0 512 512"' + '>' + linearGrad +
+					'<path fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + (+settings.transparency) + ';stroke-width:0.7px;"' +
 					'd="M512,97.209c-18.838,8.354-39.082,14.001-60.33,16.54c21.687-13,38.343-33.585,46.187-58.115'+								 'c-20.299,12.039-42.778,20.78-66.705,25.49c-19.16-20.415-46.461-33.17-76.674-33.17c-58.011,0-105.043,47.029-105.043,105.039'+
 					'c0,8.233,0.929,16.25,2.72,23.939c-87.3-4.382-164.701-46.2-216.509-109.753c-9.042,15.514-14.223,33.558-14.223,52.809'+
 					'c0,36.444,18.544,68.596,46.73,87.433c-17.219-0.546-33.416-5.271-47.577-13.139c-0.01,0.438-0.01,0.878-0.01,1.321'+
@@ -134,8 +134,8 @@ Demo: http://www.toolitup.com/JRate.html
 					'C480.11,136.773,497.918,118.273,512,97.209z"/>'+'</svg>';
 					break;
 				case 'BULB':
-					shapeRate = header + 'viewBox="0 0 512 512"' + '>' + linearGrad + 
-					'<path fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:0.7px;"' + 'd="M384,192c0,64-64,127-64,192H192c0-63-64-128-64-192c0-70.688,57.313-128,128-128S384,121.313,384,192z M304,448h-96'+
+					shapeRate = header + 'viewBox="0 0 512 512"' + '>' + linearGrad +
+					'<path fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + (+settings.transparency) + ';stroke-width:0.7px;"' + 'd="M384,192c0,64-64,127-64,192H192c0-63-64-128-64-192c0-70.688,57.313-128,128-128S384,121.313,384,192z M304,448h-96'+
 					'c-8.844,0-16,7.156-16,16s7.156,16,16,16h2.938c6.594,18.625,24.188,32,45.063,32s38.469-13.375,45.063-32H304'+
 					'c8.844,0,16-7.156,16-16S312.844,448,304,448z M304,400h-96c-8.844,0-16,7.156-16,16s7.156,16,16,16h96c8.844,0,16-7.156,16-16'+
 					'S312.844,400,304,400z M81.719,109.875l28.719,16.563c4.438-9.813,9.844-19,16.094-27.656L97.719,82.125L81.719,109.875z'+
@@ -149,7 +149,7 @@ Demo: http://www.toolitup.com/JRate.html
 					break;
 				case 'BASKET':
 					shapeRate = header + 'viewBox="0 0 30 30"' + '>' + linearGrad +
-					'<path fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + +settings.transparency + ';stroke-width:0.7px;"' + 
+					'<path fill="url(#'+id+'_grad'+currValue+')" style="stroke:' + settings.strokeColor + ';fill-opacity:' + (+settings.transparency) + ';stroke-width:0.7px;"' +
 					'd="M28.835,9.955H7.947L5.74,1.352C5.632,0.795,5.16,0.375,4.595,0.375H1.169C0.523,0.375,0,0.922,0,1.597' +
 					'c0,0.673,0.523,1.22,1.169,1.22H3.7l5.312,20.71c-0.404,0.16-0.767,0.407-1.068,0.72v0.002l-0.002-0.002' +
 					'c-0.546,0.569-0.884,1.36-0.884,2.228c0,0.868,0.338,1.659,0.884,2.228l0.044,0.044c0.543,0.545,1.28,0.88,2.089,0.88' +
@@ -222,7 +222,7 @@ Demo: http://www.toolitup.com/JRate.html
             rating = (rating - settings.min) / singleValue;
             var fillColor = settings.startColor;
 			var id = $jRate.attr('id');
-			
+
             if (settings.reverse) {
                 for (var i = 0; i < rating; i++) {
 					var j = settings.count - 1 - i;
@@ -329,7 +329,7 @@ Demo: http://www.toolitup.com/JRate.html
             partial = (settings.reverse) ? partial : 1 - partial;
             var rating = ((settings.reverse ? (settings.max - settings.min - ith + 1) : ith) - partial) * count;
             rating = settings.min + Number(workOutPrecision(rating));
-			
+
 			if (rating < settings.minSelected) rating = settings.minSelected;
             if (rating <= settings.max && rating >= settings.min) {
                 showRating(rating);
@@ -347,7 +347,7 @@ Demo: http://www.toolitup.com/JRate.html
 			// Ignore multi-touch
 			if (touches.length > 1) return;
 			var touch = touches[0];
-				
+
 			var svg = shapes.eq(ith - 1);
 			var partial;
 			if (settings.horizontal) {
@@ -355,12 +355,12 @@ Demo: http://www.toolitup.com/JRate.html
 			} else {
 				partial = (touch.pageY - svg.offset().top) / svg.height();
 			}
-				
+
 			var count = (settings.max - settings.min) / settings.count;
 			partial = (settings.reverse) ? partial : 1 - partial;
 			var rating = ((settings.reverse ? (settings.max - settings.min - ith + 1) : ith) - partial) * count;
 			rating = settings.min + Number(workOutPrecision(rating));
-			
+
 			if (rating < settings.minSelected) rating = settings.minSelected;
 			if (rating <= settings.max && rating >= settings.min) {
                 showRating(rating);
@@ -370,7 +370,7 @@ Demo: http://www.toolitup.com/JRate.html
                 });
             }
         }
-		
+
         function onMouseEnter(i) {
             return function(e) {
                 onEnterOrClickEvent(e, i, "JRate.change");
@@ -388,13 +388,13 @@ Demo: http://www.toolitup.com/JRate.html
                 onTouchOrTapEvent(e, i, "JRate.touch");
             };
 		}
-		
+
 		function onTouchClick(i) {
 			return function(e) {
                 onTouchOrTapEvent(e, i, "JRate.tap", true);
             };
 		}
-		
+
         function onChange(e, data) {
             if (settings.onChange && typeof settings.onChange === "function") {
                 settings.onChange.apply(this, [data.rating]);

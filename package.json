@@ -1,0 +1,32 @@
+{
+  "name": "jrate",
+  "version": "1.2.8",
+  "description": "Generate SVG based Rating - jQuery Plugin",
+  "main": "src/jRate.js",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^1.1.0",
+    "uglify": "^0.1.5"
+  },
+  "dependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/senthilporunan/jRate.git"
+  },
+  "keywords": [
+    "jrate",
+    "star",
+    "toolitup",
+    "rating",
+    "rate"
+  ],
+  "author": "Senthil Porunan <senthilraja39@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/senthilporunan/jRate/issues"
+  },
+  "homepage": "https://github.com/senthilporunan/jRate#readme"
+}
