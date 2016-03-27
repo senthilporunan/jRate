@@ -26,6 +26,13 @@ Include jQuery and this plugin on your page.
 <div id="jRate"></div>
 $("#jRate").jRate();
 ```
+### Multiple Instance
+```
+<div class="jRate" id="somthingUnique"></div>
+$(".jRate").jRate();
+```
+*Note:* remember to set a unique id on each element or it won't work!
+
 #Features
 ###Start Color and End Color
 
